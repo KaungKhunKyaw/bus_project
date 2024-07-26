@@ -20,4 +20,10 @@ class Route extends Model
     {
         return $this->hasMany(Stop::class);
     }
+
+    public function town()
+{
+    return $this->belongsTo(Town::class);
+}
+
 }

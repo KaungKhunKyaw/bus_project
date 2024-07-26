@@ -15,4 +15,10 @@ class Stop extends Model
     {
         return $this->belongsTo(Route::class);
     }
+
+    public function town()
+{
+    return $this->belongsTo(Town::class);
+}
+
 }
