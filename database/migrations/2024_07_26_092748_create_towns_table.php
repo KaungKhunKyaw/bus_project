@@ -13,8 +13,18 @@ return new class extends Migration
     {
         Schema::create('towns', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
+
+        Schema::table('routes', function(Blueprint $table){
+            $table->foreignId('town_id')->nullable()->constrained()->onDelete('cascade');
+        });
+
+        Schema::table('stops', function (Blueprint $table){
+            $table->foreignId('town_id')->nullable()->constrained()->onDelete('cascade');
+        });
+
     }
 
     /**
@@ -22,6 +32,16 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('routes', function(Blueprint $table){
+            $table->dropForeign(['town_id']);
+            $table->dropColumn('town_id');
+        });
+
+        Schema::table('stops', function(Blueprint $table){
+            $table->dropForeign(['town_id']);
+            $table->dropColumn('town_id');
+        });
+
         Schema::dropIfExists('towns');
     }
 };
