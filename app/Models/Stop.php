@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Stop extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['route_id', 'name'];
+
+    public function route()
+    {
+        return $this->belongsTo(Route::class);
+    }
 }

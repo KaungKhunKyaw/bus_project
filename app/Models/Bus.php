@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Bus extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name'];
+
+    public function routes()
+    {
+        return $this->hasMany(Route::class);
+    }
 }
